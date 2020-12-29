@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+<div >
+    <strong>Your dashboard</strong>
+</div>
+<div> 
+    {% if g.user %}
+    <span class="btn btn-outline-dark"><a href="{{url_for('gooddeeds.create')}}">Create a deed</a></span>
+    <span></span>
+    <span class="btn btn-outline-dark"><a href="#">Completed deeds</a></span>
+    {% endif %}
+</div>
+
+
+
+<div>
+    <strong>Current Deeds</strong>
+</div>
+
+<div class="container">
+    {%for item in deeds %}  
+        <div>
+            <strong>{{item['title']}}</strong>
+        </div>
+        <div>
+            <p>{{item['location']}}</p>
+        </div>
+    {% endfor %}
+</div>
+
+
+</div>
+{% endblock %}

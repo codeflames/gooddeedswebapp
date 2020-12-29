@@ -3,7 +3,7 @@
 body{
   /* overflow: hidden; */
   font-family: Montserrat, sans-serif;
-  color: #505962;
+  color:rgb(35, 56, 98);
 }
 
 /* NAvigation */
@@ -17,26 +17,26 @@ body{
 }
 .navbar .navbar-brand{
   height: 3rem;
-  color: black;
+  color:rgb(35, 56, 98);
 }
 
 .navbar-nav li{
   padding-right: .7rem;
 }
 .navbar-dark .navbar-nav .nav-link{
-   color: black;
+   color:rgb(35, 56, 98);
    padding-top: .8rem;
 
 }
 .navbar-dark .navbar-nav .nav-link .active,
 .navbar-dark .navbar-nav .nav-link:hover {
-  color: green;
+  color: rgb(35, 75, 98);
   padding-top: .8rem;
   
 }
 
 .navbar-toggler-icon{
-  background-color: rgb(43, 37, 37);
+  background-color:rgb(35, 56, 98);
 }
 
 /* end of navigation styling */
@@ -120,36 +120,33 @@ line-height: 30px;
 }
 
 .service img{
-  height: 85%;
+  height: 65%;
   width:55%;
   
 }
 
 .serviceimg{
-  height:30vh;
+  height:45vh;
 }
 
-.narrow .btn-lg{
-  border-width: medium;
-  text-transform: uppercase;
-  font-size: 1.2rem;
-  padding: 1.2rem;
-  margin: 1rem;
-  background-color: rgb(115, 173, 115);
-  border-color: rgb(64, 99, 36);
-}
-.narrow .btn-lg:hover{
+#prices .btn:hover{
   
-  background-color: rgb(5, 148, 5);
-  border-color: rgb(233, 236, 230);
+  background-color: rgb(35, 56, 98);
 }
 
 .underline{
-  background-color: rgb(5, 148, 5);
+  background-color: rgb(109, 191, 185);
   width: 3rem;
   height: 0.2rem;
   margin: 0 auto 2rem;
   
+}
+
+#prices{
+  
+  height: 75vh;
+  margin-top: 15vh;
+  padding-bottom: 10vh;
 }
 
 .offset::before{
@@ -165,49 +162,16 @@ line-height: 30px;
 
 
 
-
-.fixed-background{
-  margin-top: 0;
-  background-image: url("/static/giveaways.png");  
+.price img{
+   width: 55%;
+  height: 55%;
   
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  z-index: -1;
-  /* opacity: .5; */
-  background-attachment: fixed;
-}
-.pricebg{
-  background-color: rgba(12, 11, 11, 0.411);
 }
 
-#prices{
-  background-color: rgba(0,0,0,);
-  color: white;
-}
-
-
-/* client section */
-
-#clients img{
-  width: 100%;
-  height: 80%;
-  margin:1rem 1rem;
-  border-radius: 50%;
-}
-
-.clients-hr{  
-  width: auto;
-  height: .09rem;
-  background-color: green;
-  margin-bottom: 1rem;
-}
-
-/* footer start here */
 
 #about{
-  margin-top: 2rem;
-  background-color: rgb(19, 18, 18);
+  margin-top: 5rem;
+  background-color: rgb(74, 83, 110);
   color: white;
 }
 #about i{
@@ -219,7 +183,7 @@ line-height: 30px;
 /* mediaQuery */
 
 @media (max-width: 767px){
-  #clients img{
+  /* #clients img{
     width: 50%;
     margin:0 auto;
     display: block;
@@ -237,7 +201,7 @@ line-height: 30px;
     font-size: 1rem;
     
     padding-bottom: 1rem;
-  }
+  } */
   
   .btn-lg{
     padding: .5rem 1rem;

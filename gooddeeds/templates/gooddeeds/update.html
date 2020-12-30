@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container">
+        <div> 
+    
+            {% if g.user %}
+            <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.dashboard')}}">Current deeds</a>
+    <a class="btn btn-outline-dark active" href="{{url_for('gooddeeds.create')}}">Create a deed</a>
+    <span></span>
+    <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.completed')}}">Completed deeds</a>
+            {% endif %}
+        </div>
+        
+        
+        
+        <div>
+            <strong>Edit Deed</strong>
+        </div>
+        <form action="/{{deeds['id']}}/update" method="post">
+            <div class="form-group">
+                <input autofocus class="form-control" name="title" placeholder="title" type="text" value="{{request.form['title'] or deeds['title'] }}">
+            </div>
+            <div class="form-group">
+                <!-- <input class="form-control" name="description" placeholder="Description" height="200px" type="text"> -->
+                <textarea class="form-control" name="description" id="description" placeholder="Description" cols="30" rows="5">{{ request.form['description'] or deeds['description'] }}</textarea>
+            </div>
+            <div class="form-group">
+                <input class="form-control" name="location" placeholder="Location(Country and state)" type="text" value="{{request.form['location'] or deeds['location'] }}">
+            </div>
+            <div class="form-group">
+                <input class="form-control" name="address" placeholder="Address" type="text" value="{{request.form['address'] or deeds['address'] }}">
+            </div>
+            <div class="form-group">
+                <input type="date" name="date" class="form-control">
+            </div>
+            <button class="btn btn-primary" type="submit" id="submit">Save</button>
+            <div>
+                <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.delete', id=deeds['id'])}}">delete</a>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

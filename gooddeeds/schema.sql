@@ -20,3 +20,14 @@ CREATE TABLE deeds (
 
   FOREIGN KEY (userid) REFERENCES users(id)
 );
+
+CREATE TABLE eventreg(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  userid INTEGER NOT NULL,
+  eventid INTEGER NOT NULL,
+  likes INTEGER DEFAULT 0,
+  dislikes INTEGER DEFAULT 0,
+
+  FOREIGN KEY (userid) REFERENCES users(id),
+  FOREIGN KEY (eventid) REFERENCES deeds(id)
+)

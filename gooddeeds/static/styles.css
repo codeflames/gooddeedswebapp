@@ -179,6 +179,17 @@ line-height: 30px;
   padding: .5rem;
 }
 
+.btn-outline-dark{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.dashboard_card{
+  background-color: rgb(230, 238, 237);
+  padding: 15px;
+  margin-top: 13px;
+  margin-bottom: 13px;
+}
 
 /* mediaQuery */
 
@@ -241,27 +252,27 @@ line-height: 30px;
     
     font-size: 1rem;
   }
-  form{
+  /* form{
     padding: 2rem;
     margin: 0 auto;
     width: 1;
     background-color: burlywood;
     
-  }
+  } */
   
 }
 
 /* login page */
-form{
+/* form{
   padding: 3rem;
   width: 45%;
   margin: 0 auto;
   
   background-color:rgba(255, 255, 255, 0.151);
   
-}
+} */
 
-.form-btn{
+/* .form-btn{
   color: white;
   text-transform: capitalize;
 }
@@ -270,4 +281,4 @@ form{
 }
 .login-page{
   top: 15%;
-}
+} */

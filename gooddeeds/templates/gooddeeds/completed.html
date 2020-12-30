@@ -2,42 +2,65 @@
 
 {% block body %}
 <div class="container">
-<div >
-    <strong>Your dashboard</strong>
-</div>
-<div> 
-    
-    {% if g.user %}
-    <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.dashboard')}}">Current deeds</a>
-    <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.create')}}">Create a deed</a>
-    <span></span>
-    <a class="btn btn-outline-dark active" href="{{url_for('gooddeeds.completed')}}">Completed deeds</a>
-    {% endif %}
-</div>
+    <div>
+        <strong>Your dashboard</strong>
+    </div>
+    <div>
 
-
-
-<div>
-    <strong>Completed Deeds</strong>
-</div>
-
-<div class="container">
-    {%for item in deeds %}  
-        <!-- {% if item.isdone == true %} -->
-        <div>
-            <strong>{{item['title']}}</strong>
-        </div>
-        <div>
-            <p>{{item['location']}}</p>
-        </div>
-        <!-- {% endif %} -->
-        {% if g.user['id'] == item['userid'] %}
-        <div>
-            <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.isdone', deed_id=item['id'])}}">Redo</a>
-        </div>
+        {% if g.user %}
+        <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.dashboard')}}">Current deeds</a>
+        <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.create')}}">Create a deed</a>
+        <span></span>
+        <a class="btn btn-outline-dark active" href="{{url_for('gooddeeds.completed')}}">Completed deeds</a>
         {% endif %}
-    {% endfor %}
-</div>
+    </div>
+
+
+
+    <div>
+        <strong>Completed Deeds</strong>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    {% for item in deeds %}
+                    <div class="col-md-4">
+
+                        <div class="card dashboard_card">
+                            <div class="card-title">
+                                <strong>{{item['title']}}</strong>
+                            </div>
+                            <div class="card-subtitle">
+                                <p>Location: {{item['location']}}</p><span></span>
+                                <p> Address: {{ item['address'] }}</p>
+                            </div>
+
+
+                            <!-- modal -->
+                            <!-- Button trigger modal -->
+                            <div>
+                                <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.details', id=item['id'])}}">View Details</a>
+                            </div>
+
+
+
+
+                            {% if g.user['id'] == item['userid'] %}
+                            <div>
+                                <a class="btn btn-outline-dark"
+                                    href="{{url_for('gooddeeds.isdone', deed_id=item['id'])}}">Redo</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 
 </div>

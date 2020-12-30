@@ -2,6 +2,21 @@
 
 {% block body %}
     <div class="container">
+        <div> 
+    
+            {% if g.user %}
+            <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.dashboard')}}">Current deeds</a>
+    <a class="btn btn-outline-dark active" href="{{url_for('gooddeeds.create')}}">Create a deed</a>
+    <span></span>
+    <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.completed')}}">Completed deeds</a>
+            {% endif %}
+        </div>
+        
+        
+        
+        <div>
+            <strong>Create Deeds</strong>
+        </div>
         <form action="/createdeed" method="post">
             <div class="form-group">
                 <input autofocus class="form-control" name="title" placeholder="title" type="text">
@@ -16,8 +31,11 @@
             <div class="form-group">
                 <input class="form-control" name="address" placeholder="Address" type="text">
             </div>
-            
+            <div class="form-group">
+                <input type="date" name="date" class="form-control">
+            </div>
             <button class="btn btn-primary" type="submit" id="submit">Create</button>
         </form>
     </div>
+
 {% endblock %}

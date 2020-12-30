@@ -7,9 +7,10 @@
 </div>
 <div> 
     {% if g.user %}
-    <span class="btn btn-outline-dark"><a href="{{url_for('gooddeeds.create')}}">Create a deed</a></span>
+    <a class="btn btn-outline-dark active" href="{{url_for('gooddeeds.dashboard')}}">Current deeds</a>
+   <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.create')}}">Create a deed</a>
     <span></span>
-    <span class="btn btn-outline-dark"><a href="#">Completed deeds</a></span>
+ <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.completed')}}">Completed deeds</a>
     {% endif %}
 </div>
 
@@ -21,12 +22,22 @@
 
 <div class="container">
     {%for item in deeds %}  
+        <!-- {% if item.isdone == false %} -->
         <div>
             <strong>{{item['title']}}</strong>
         </div>
         <div>
             <p>{{item['location']}}</p>
         </div>
+        <!-- {% endif %} -->
+        {% if g.user['id'] == item['userid'] %}
+        <div>
+            <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.isdone', deed_id=item['id'])}}">done</a>
+        </div>
+        <div>
+            <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.delete', id=item['id'])}}">delete</a>
+        </div>
+        {% endif %}
     {% endfor %}
 </div>
 

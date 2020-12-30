@@ -20,7 +20,7 @@ def index():
 def dashboard():
     db = get_db()
     deeds = db.execute(
-        "SELECT title, location FROM deeds WHERE userid=:user", {"user":g.user['id']}
+        "SELECT id, userid, title, location, isdone FROM deeds WHERE  isdone =:bool", { "bool":False}
     )
     return render_template('gooddeeds/dashboard.html', deeds=deeds)
 
@@ -50,9 +50,9 @@ def create():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO deeds (title, description, location, address, userid)'
-                ' VALUES (?, ?, ?, ?, ?)',
-                (title, description, location, address, g.user['id'])
+                'INSERT INTO deeds (title, description, location, isdone, address, userid)'
+                ' VALUES (?, ?, ?, ?, ?, ?)',
+                (title, description, location, False, address, g.user['id'])
             )
             db.commit()
             return redirect(url_for('gooddeeds.dashboard'))
@@ -61,3 +61,53 @@ def create():
 
 
 
+@bp.route('/completed')
+@login_required
+def completed():
+    db = get_db()
+    deeds = db.execute(
+        "SELECT id, userid, title, location, isdone FROM deeds WHERE isdone =:bool" , {"bool":True}
+    )
+    return render_template('gooddeeds/completed.html', deeds=deeds)
+
+
+
+@bp.route("/isdone/<int:deed_id>")
+@login_required
+def isdone(deed_id):
+    db = get_db()
+    deedid = db.execute(
+        "SELECT id, isdone FROM deeds WHERE id =:theid",{"theid":deed_id}
+    )
+
+    is_done = None
+    is_id = None
+    for item in deedid:
+        is_done = item['isdone']
+        is_id = item['id']
+    
+
+    db.execute(
+        "UPDATE deeds SET isdone = ? WHERE id = ?",
+        (not is_done, is_id,)
+    )
+
+    db.commit()
+
+    return redirect(url_for('gooddeeds.dashboard'))
+
+@bp.route('/<int:id>/delete')
+@login_required
+def delete(id):
+    db = get_db()
+    deedid = db.execute(
+        "SELECT id FROM deeds WHERE id =:theid",{"theid":id}
+    )
+    is_id = None
+    for item in deedid:
+        is_id = item['id']
+
+    db.execute('DELETE FROM deeds WHERE id = ?', (is_id,))
+    db.commit()
+
+    return redirect(url_for('gooddeeds.dashboard'))

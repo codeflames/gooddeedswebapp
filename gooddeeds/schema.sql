@@ -8,14 +8,15 @@ CREATE TABLE users (
   password TEXT NOT NULL
 );
 
-CREATE TABLE deed (
+CREATE TABLE deeds (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  author_id INTEGER NOT NULL,
+  userid INTEGER NOT NULL,
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   title TEXT NOT NULL,
-  body TEXT NOT NULL,
-  imageURL TEXT,
-  isdone BOOLEAN NOT NULL DEFAULT FALSE,
+  description TEXT NOT NULL,
+  address TEXT,
+  location TEXT NOT NULL,
+  isdone BOOLEAN NOT NULL,
 
-  FOREIGN KEY (author_id) REFERENCES user (id)
+  FOREIGN KEY (userid) REFERENCES users(id)
 );

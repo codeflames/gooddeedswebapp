@@ -3,6 +3,11 @@
 This is a cs50 introduction to computer science final project called Gooddeeds.
 it is a web app where users can check if there is any volunteer work(good deed) posted by other users and join to participate or create one themselves.
 
+### Technologies used:
+    -html, css and twitter bootstrap for the front end.
+    -python flask web framework for the back end.
+    -sqlite for the database.
+    
 ## Features of Gooddeeds:
 there is the authentication and gooddeeds features.
 ### Authentication Features:

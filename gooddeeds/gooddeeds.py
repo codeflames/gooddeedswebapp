@@ -21,7 +21,7 @@ def index():
 def dashboard():
     db = get_db()
     deeds = db.execute(
-        "SELECT id, userid, address, description, title, date, location, isdone FROM deeds WHERE  isdone =:bool", { "bool":False}
+        "SELECT id, userid, address, description, title, date, location, isdone FROM deeds WHERE  isdone =:bool ORDER BY created DESC", { "bool":False}
     )
     
     return render_template('gooddeeds/dashboard.html', deeds=deeds)
@@ -60,6 +60,7 @@ def create():
                 (title, description, datetime.datetime.now(), location, False, address, g.user['id'], date)
             )
             db.commit()
+            flash('{} created'.format(title))
             return redirect(url_for('gooddeeds.dashboard'))
 
     return render_template('gooddeeds/createdeed.html')
@@ -82,14 +83,16 @@ def completed():
 def isdone(deed_id):
     db = get_db()
     deedid = db.execute(
-        "SELECT id, isdone FROM deeds WHERE id =:theid",{"theid":deed_id}
+        "SELECT id, title, isdone FROM deeds WHERE id =:theid",{"theid":deed_id}
     )
 
     is_done = None
     is_id = None
+    title = None
     for item in deedid:
         is_done = item['isdone']
         is_id = item['id']
+        title = item['title']
     
 
     db.execute(
@@ -98,6 +101,7 @@ def isdone(deed_id):
     )
 
     db.commit()
+    flash('{} Completed status changed'.format(title))
 
     return redirect(url_for('gooddeeds.dashboard'))
 
@@ -106,15 +110,18 @@ def isdone(deed_id):
 def delete(id):
     db = get_db()
     deedid = db.execute(
-        "SELECT id FROM deeds WHERE id =:theid",{"theid":id}
+        "SELECT id, title FROM deeds WHERE id =:theid",{"theid":id}
     )
     is_id = None
+    title = None
     for item in deedid:
         is_id = item['id']
+        title = item['title']
 
     db.execute('DELETE FROM deeds WHERE id = ?', (is_id,))
     db.commit()
-
+    flash('{} deleted'.format(title))
+    
     return redirect(url_for('gooddeeds.dashboard'))
 
 @bp.route('/<int:id>/update',methods=('GET', 'POST') )
@@ -156,6 +163,7 @@ def update(id):
                 (title, description, date, location, address, is_id)
             )
             db.commit()
+            flash('{} updated'.format(title))
             return redirect(url_for('gooddeeds.dashboard'))
     
     return render_template('gooddeeds/update.html',deeds = deeds)
@@ -186,10 +194,24 @@ def details(id):
 @login_required
 def join(id):
     db = get_db()
+
+    deedid = db.execute(
+        "SELECT id, title FROM deeds WHERE id =:theid",{"theid":id}
+    )
+
+    error = None
+    title = None
+    for item in deedid:
+        title = item['title']
+
+
     if db.execute(
             'SELECT id FROM eventreg WHERE userid =:userid AND eventid =:event', {"userid":g.user['id'], "event":id}
         ).fetchone() is not None:
         error = 'You are already registered.'
+    
+    if error is not None:
+        flash(error)
     
     else:
         db.execute(
@@ -197,7 +219,17 @@ def join(id):
             (g.user['id'], id)
         )
         db.commit()
-        return redirect(url_for('gooddeeds.details', id=id))
+        flash('Congratulations, you successfully registered for {}. Check back on the date provided'.format(title))
+        return redirect(url_for('gooddeeds.dashboard', id=id))
 
-    flash(error)
-    return render_template('gooddeeds/details.html')
+    return render_template('gooddeeds/join.html')
+
+@bp.route('/joined')
+@login_required
+def joined():
+    db = get_db()
+
+    deeds = db.execute(
+        "SELECT dISTINCT deeds.* FROM deeds INNER JOIN eventreg ON deeds.id = eventreg.eventid WHERE eventreg.userid =:id" , {"id":g.user['id']}
+    )
+    return render_template('gooddeeds/joined.html', deeds=deeds)

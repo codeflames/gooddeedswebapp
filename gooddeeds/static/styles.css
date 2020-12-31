@@ -193,6 +193,15 @@ line-height: 30px;
   margin-top: 13px;
   margin-bottom: 13px;
 }
+.flash{
+  padding: 6px;
+  color:white;
+  background-color: rgb(74, 83, 110);
+  margin-bottom: 5px;
+}
+.card-title{
+  text-transform: uppercase;
+}
 
 /* mediaQuery */
 

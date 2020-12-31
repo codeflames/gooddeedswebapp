@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+    <div>
+
+        {% if g.user %}
+        <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.dashboard')}}">Back to Dashboard</a>
+        {% endif %}
+    </div>
+
+{% endblock %}

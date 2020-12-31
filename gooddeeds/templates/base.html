@@ -71,7 +71,7 @@
     <!-- end of navigation -->
 
     {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
+    <div class="flash container text-center">{{ message }}</div>
   {% endfor %}
   {% block content %}{% endblock %}
 

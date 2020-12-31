@@ -19,3 +19,11 @@ there is the authentication and gooddeeds features.
     - details tab which shows the complete details of a deed that was posted. It can be viewed from any of the tabs except the edit tab.
  
  ### Thanks to all cs50 staff for the lectures. it was rewarding and just as Dr David J. Malan said - I am proud of where I am at the end of this course compared to where I was at the beginning.
+
+ #### To run the app:
+        In a python virtual environment run:
+        $ export FLASK_APP=gooddeeds
+        $ export FLASK_ENV=development
+        $ flask run
+
+        for windows: use set instead of export

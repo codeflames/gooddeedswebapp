@@ -19,6 +19,9 @@ body{
   height: 3rem;
   color:rgb(35, 56, 98);
 }
+.navbar-dark .navbar-brand:hover {
+  color: rgb(35, 56, 98);
+}
 
 .navbar-nav li{
   padding-right: .7rem;

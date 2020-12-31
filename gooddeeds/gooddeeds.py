@@ -1,3 +1,4 @@
+import datetime
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
@@ -22,6 +23,7 @@ def dashboard():
     deeds = db.execute(
         "SELECT id, userid, address, description, title, date, location, isdone FROM deeds WHERE  isdone =:bool", { "bool":False}
     )
+    
     return render_template('gooddeeds/dashboard.html', deeds=deeds)
 
 
@@ -53,9 +55,9 @@ def create():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO deeds (title, description, location, isdone, address, userid, date)'
-                ' VALUES (?, ?, ?, ?, ?, ?, ?)',
-                (title, description, location, False, address, g.user['id'], date)
+                'INSERT INTO deeds (title, description, created, location, isdone, address, userid, date)'
+                ' VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                (title, description, datetime.datetime.now(), location, False, address, g.user['id'], date)
             )
             db.commit()
             return redirect(url_for('gooddeeds.dashboard'))
@@ -166,5 +168,36 @@ def details(id):
     deeds = db.execute(
         "SELECT * FROM deeds WHERE  id =:ide", { "ide":id}
     )
-    return render_template('gooddeeds/details.html', deeds=deeds)
+    user_name = db.execute(
+        "SELECT users.username FROM users INNER JOIN deeds ON users.id = deeds.userid WHERE deeds.id=:ide ", { "ide":id}
+    ).fetchone()
 
+    event_data = db.execute(
+        "SELECT COUNT(*) FROM eventreg WHERE eventid =:ide", {"ide":id}
+    ).fetchone()
+
+    username = user_name['username']
+    eventdata = event_data[0]
+
+    return render_template('gooddeeds/details.html', deeds=deeds, eventdata=eventdata, username=username)
+
+
+@bp.route('/<int:id>/join')
+@login_required
+def join(id):
+    db = get_db()
+    if db.execute(
+            'SELECT id FROM eventreg WHERE userid =:userid AND eventid =:event', {"userid":g.user['id'], "event":id}
+        ).fetchone() is not None:
+        error = 'You are already registered.'
+    
+    else:
+        db.execute(
+            'INSERT INTO eventreg (userid, eventid) VALUES (?,?)',
+            (g.user['id'], id)
+        )
+        db.commit()
+        return redirect(url_for('gooddeeds.details', id=id))
+
+    flash(error)
+    return render_template('gooddeeds/details.html')

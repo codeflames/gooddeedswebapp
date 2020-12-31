@@ -1,12 +1,23 @@
 {% extends 'base.html' %}
 
-
+S
 {% block content %}
+<div class="container auth">
+  <div>
+    <h2>
+      Login:
+    </h2>
+  </div>
   <form method="post">
-    <label for="username">Username</label>
-    <input name="username" id="username" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <input type="submit" value="Log In">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input name="username" class="form-control" id="username" placeholder="Username" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
+    </div>
+    <input type="submit" class="btn btn-outline-dark" value="Log In">
   </form>
+</div>
 {% endblock %}

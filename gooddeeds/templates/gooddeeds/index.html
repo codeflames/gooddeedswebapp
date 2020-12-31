@@ -1,150 +1,164 @@
+{% extends "base.html" %}
 
-    {% extends "base.html" %}
+{% block body %}
 
-    {% block body %}
-
-    <div class="row">
-    <div class="landing col-md-6" >
-      <div class="home-wrap">
-        <div class="home-inner">
-          <img src="/static/giveaway.png" alt="home image">
-        </div>
+<div class="row">
+  <div class="landing col-md-6">
+    <div class="home-wrap">
+      <div class="home-inner">
+        <img src="/static/giveaway.png" alt="home image">
       </div>
     </div>
+  </div>
 
-    <div class="col-md-6 my-auto" >
-      <div class="text-center caption ">
+  <div class="col-md-6 my-auto">
+    <div class="text-center caption ">
       <h1>do you want to change the world positively?</h1>
       <h3>join others to do some <br> <strong>good deeds</strong> <br> around where you leave</h3>
+      <div>
+        <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.dashboard')}}">
+          {% if g.user %}
+          Continue
+          {% else %}
+          Start here
+          {% endif %}
+        </a>
+      </div>
     </div>
   </div>
-  </div>
-  <!-- end home session -->
+</div>
+<!-- end home session -->
 
-  <!--start services section  -->
-  <div id="services" class="offset">
+<!--start services section  -->
+<div id="services" class="offset">
 
-    <!-- start of jumbotron -->
-    <div class="jumbotrn">
-      <!-- narrow start -->
-      <div class="narrow">
-          <div class="col-12 text-center">
-            <h3 class="heading text-center">How it works</h3>
-            <div class="underline"></div>
-            <div class="row text-center">
-              <!-- each row item -->
-              <div class="col-md-3">
-                <div class="service">
-                  <div class="serviceimg">
-                    <img src="/static/account.png" alt="create account placeholder">
-                  </div>  
-                  
-                  <h4>
-                    Create an account
-                  </h4>
-                  <p>An account gives you the chance to  create or participate in a good deed</p>
-                </div>
+  <!-- start of jumbotron -->
+  <div class="jumbotrn">
+    <!-- narrow start -->
+    <div class="narrow">
+      <div class="col-12 text-center">
+        <h3 class="heading text-center">How it works</h3>
+        <div class="underline"></div>
+        <div class="row text-center">
+          <!-- each row item -->
+          <div class="col-md-3">
+            <div class="service">
+              <div class="serviceimg">
+                <img src="/static/account.png" alt="create account placeholder">
               </div>
-              <div class="col-md-3">
-                <div class="service">
-                  <div class="serviceimg">
-                    <img src="/static/category.png" alt="category">
-                  </div>
-                  
-                  <h4>
-                    Choose a category
-                  </h4>
-                  <p>Choose the good deed category you want to take part in</p>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="service">
-                  <div class="serviceimg">
-                    <img src="/static/choosegiveaway.png" alt="select giveaway">
-                  </div>
-                  
-                  <h4>
-                    Choose a good deed
-                  </h4>
-                  <p>Choose any good deed you can actively participate in</p>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="service">
-                  <div class="serviceimg">
-                    <img src="/static/results.png" alt="reults">
-                  </div>
-                  
-                  <h4>
-                    show your results
-                  </h4>
-                  <p>Be proud of the good deed done and showcase it.</p>
-                </div>
-              </div>
-              <!-- end of row items -->
 
+              <h4>
+                Create an account
+              </h4>
+              <p>An account gives you the chance to create or participate in a good deed</p>
             </div>
           </div>
-      </div>
-      <!-- narrow class end -->
-    </div>
-    <!-- end of jumbotron -->
-
-  </div>
-  <!-- end services section -->
-
-
-
-
-    <!-- Fixed background start -->
-      <!-- narrow start -->
-      <div class="narrow" id="prices">
-          <div class="col-12 text-center">
-            <h3 class="heading text-center">Ready?</h3>
-            <div class="underline"></div>
-            <div class="row text-center">
-              <!-- each row item -->
-              <div class="col-md-6  my-auto">
-                <div class="price">
-                  <img src="/static/starthere.png" alt="start here placeholder">
-                </div>
+          <div class="col-md-3">
+            <div class="service">
+              <div class="serviceimg">
+                <img src="/static/category.png" alt="category">
               </div>
-              <div class="col-md-6  my-auto">
-                <div class="price">
-                  <p>are you ready to do some good deeds <br> and change the world positively?</p>
-                </div>
-                <div>
-                  <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.dashboard')}}">Start here</a>
-                </div>
-              </div>
-                
-              </div>
-              <!-- end of row items -->
+
+              <h4>
+                Choose a good deed
+              </h4>
+              <p>Choose the good deed you would like to take part in</p>
+            </div>
           </div>
-      </div>
-      <!-- narrow class end -->
-    </div>
+          <div class="col-md-3">
+            <div class="service">
+              <div class="serviceimg">
+                <img src="/static/choosegiveaway.png" alt="select giveaway">
+              </div>
 
+              <h4>
+                Join the good deed
+              </h4>
+              <p>Read about and join the good deed if interested</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="service">
+              <div class="serviceimg">
+                <img src="/static/results.png" alt="reults">
+              </div>
 
+              <h4>
+                Participate
+              </h4>
+              <p>Wait for the day of the deed and participate.</p>
+            </div>
+          </div>
+          <!-- end of row items -->
 
-  
-
-  <!--start about section  -->
-  <div id="about" class="offset">
-    <footer>
-      <div class="row justify-content-center">
-        <div class="col-md-5 text-center">
-          <h4>GoodDeeds</h4>
-          <p>created with love in fulfilment of the  edx/harvard's cs50 intro to computer science course 2020</p>
-          <strong>Contact info</strong>
-          <p>yerekadonald@gmail.com</p>
-          <p>09031561331</p>
-          <a href="" target="_blank"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
-          <a href="" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-          <a href="" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
         </div>
       </div>
-    </footer>
+    </div>
+    <!-- narrow class end -->
   </div>
-  <!-- end about section -->
-  {% endblock %}
+  <!-- end of jumbotron -->
+
+</div>
+<!-- end services section -->
+
+
+
+
+<!-- Fixed background start -->
+<!-- narrow start -->
+<div class="narrow" id="prices">
+  <div class="col-12 text-center">
+    <h3 class="heading text-center">Ready?</h3>
+    <div class="underline"></div>
+    <div class="row text-center">
+      <!-- each row item -->
+      <div class="col-md-6  my-auto">
+        <div class="price">
+          <img src="/static/starthere.png" alt="start here placeholder">
+        </div>
+      </div>
+      <div class="col-md-6  my-auto">
+        <div class="price">
+          <p>are you ready to do some good deeds <br> and change the world positively?</p>
+        </div>
+        <div>
+          <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.dashboard')}}">
+            {% if g.user %}
+            Continue
+            {% else %}
+            Start here
+            {% endif %}
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <!-- end of row items -->
+  </div>
+</div>
+<!-- narrow class end -->
+</div>
+
+
+
+
+
+<!--start about section  -->
+<div id="about" class="offset">
+  <footer>
+    <div class="row justify-content-center">
+      <div class="col-md-5 text-center">
+        <h4>GoodDeeds</h4>
+        <p>created with love in fulfilment of the edx/harvard's cs50 intro to computer science course 2020</p>
+        <strong>Contact info</strong>
+        <p>yerekadonald@gmail.com</p>
+        <p>09031561331</p>
+        <a href="" target="_blank"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+        <a href="" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+        <a href="" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </footer>
+</div>
+<!-- end about section -->
+{% endblock %}

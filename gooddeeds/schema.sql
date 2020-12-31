@@ -17,6 +17,7 @@ CREATE TABLE deeds (
   address TEXT,
   location TEXT NOT NULL,
   isdone BOOLEAN NOT NULL,
+  date NUMERIC
 
   FOREIGN KEY (userid) REFERENCES users(id)
 );

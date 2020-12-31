@@ -39,6 +39,7 @@
                             <div>
                                
                                 <a class="btn btn-outline-dark" href="{{url_for('gooddeeds.details', id=item['id'])}}">View Details</a>
+                                
                             </div>
                             {% if g.user['id'] == item['userid'] %}
                             <div>
